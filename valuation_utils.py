@@ -1,15 +1,18 @@
 import numpy as np
 
+
 def _sum(*, initial_value, ratio, number):
     if ratio == 1.0:
         return initial_value * number
     return initial_value * ratio * (1.0 - ratio ** number) / (1.0 - ratio)
 
-def dcf_value(*, starting_free_cash_flow, initial_year_number, initial_growth_rate, later_growth_rate, permanent_growth_rate, discount_rate, cash_and_equivalents, total_debt,  outstanding_shares):
+
+def dcf_value(*, starting_free_cash_flow, initial_year_number, initial_growth_rate, later_growth_rate,
+              permanent_growth_rate, discount_rate, cash_and_equivalents, total_debt, outstanding_shares):
     g0 = initial_growth_rate
     g1 = later_growth_rate
     g2 = permanent_growth_rate
-    r = discount_rate 
+    r = discount_rate
     a0 = starting_free_cash_flow
     q0 = (1 + g0) / (1 + r)
     q1 = (1 + g1) / (1 + r)
@@ -25,6 +28,7 @@ def dcf_value(*, starting_free_cash_flow, initial_year_number, initial_growth_ra
     s_total = s0 + s1 + s2 + cash_and_equivalents - total_debt
     # estimated stock price
     return s_total / outstanding_shares
+
 
 def multiple_of_earnings_value(*, ebitda, outstanding_shares, multiple):
     return ebitda / outstanding_shares * multiple
